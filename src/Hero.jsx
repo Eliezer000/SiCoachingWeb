@@ -325,7 +325,7 @@ export default function Hero() {
       </section>
 
       {/* Services Section */}
-      <section id="servicios" className="py-24 md:py-32">
+      <section id="servicios" className="py-24 md:py-32 ">
         <motion.div 
           className="text-center mb-16"
           variants={fadeIn}
@@ -362,7 +362,7 @@ export default function Hero() {
                 <img 
                   src="/logo2.png" 
                   alt="SiCoaching Personal" 
-                  className="w-48 mb-8"
+                  className="w-60 mb-4"
                 />
                 <h3 className="text-4xl font-bold text-white mb-6">Coaching Personal</h3>
                 <p className="text-white/90 text-xl leading-relaxed">
@@ -436,7 +436,7 @@ export default function Hero() {
                 <img 
                   src="/logo3.png" 
                   alt="SiCoaching Digital" 
-                  className="w-48 mb-8"
+                  className="w-60 mb-4"
                 />
                 <h3 className="text-4xl font-bold text-white mb-6">Productos Digitales</h3>
                 <p className="text-white/90 text-xl leading-relaxed">
@@ -508,9 +508,9 @@ export default function Hero() {
                 variants={fadeIn}
               >
                 <img 
-                  src="/logo.png" 
+                  src="/logo1.png" 
                   alt="SiCoaching Empresarial" 
-                  className="w-48 mb-8"
+                  className="w-60 mb-4"
                 />
                 <h3 className="text-4xl font-bold text-[#001731] mb-6">Coaching Empresarial</h3>
                 <p className="text-gray-600 text-xl leading-relaxed">
