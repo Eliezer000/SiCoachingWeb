@@ -24,7 +24,7 @@ export default function Hero() {
   const handleOpenContactForm = (serviceTitle) => {
     setSelectedService(serviceTitle)
     setIsContactFormOpen(true)
-  }
+  } 
 
   // Optimized animation variants
   const fadeIn = {
@@ -96,7 +96,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu - Updated positioning */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
@@ -104,7 +104,8 @@ export default function Hero() {
               initial="initial"
               animate="animate"
               exit="exit"
-              className="fixed top-0 left-0 right-0 bottom-0 bg-[#e9e9e9] z-[55] md:hidden flex flex-col justify-center items-center"
+              className="fixed inset-0 bg-[#e9e9e9] z-[55] md:hidden flex flex-col justify-center items-center"
+              style={{ top: '0', height: '100vh' }} // Ensure full viewport height
             >
               <nav className="flex flex-col items-center gap-8">
                 {['Inicio', 'Nosotros', 'Servicios', 'Contacto'].map((item) => (
