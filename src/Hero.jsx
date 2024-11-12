@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Target, Users, Briefcase, Brain, ArrowRight, Instagram, Facebook, Linkedin, Sparkles, ArrowUpRight, CheckCircle2, Star } from 'lucide-react'
+import { Menu, X, Target, Users, Briefcase, Brain, ArrowRight, Instagram, Facebook, Linkedin, Sparkles, ArrowUpRight, CheckCircle2, Star, BarChart2, Zap, Award } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ContactFormPopup from './ContactFormPopup'
 
@@ -18,11 +18,7 @@ export default function Hero() {
   }, [])
 
   useEffect(() => {
-    if (isMenuOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = 'unset'
-    }
+    document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset'
   }, [isMenuOpen])
 
   const handleOpenContactForm = (serviceTitle) => {
@@ -30,29 +26,17 @@ export default function Hero() {
     setIsContactFormOpen(true)
   }
 
-  // Enhanced animation variants
+  // Optimized animation variants
+  const fadeIn = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition: { duration: 0.5 } },
+    exit: { opacity: 0 }
+  }
+
   const slideIn = {
-    initial: { x: '100%', opacity: 0 },
-    animate: { x: 0, opacity: 1 },
-    exit: { x: '100%', opacity: 0 }
-  }
-
-  const fadeUpWithScale = {
-    initial: { opacity: 0, y: 20, scale: 0.95 },
-    animate: { 
-      opacity: 1, 
-      y: 0, 
-      scale: 1,
-      transition: { duration: 0.5 }
-    }
-  }
-
-  const staggerChildren = {
-    animate: {
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+    initial: { x: '100%' },
+    animate: { x: 0, transition: { type: "tween", duration: 0.3 } },
+    exit: { x: '100%' }
   }
 
   return (
@@ -80,7 +64,7 @@ export default function Hero() {
             
             <button 
               onClick={() => setIsMenuOpen(!isMenuOpen)} 
-              className="md:hidden z-[60] relative" // Increased z-index
+              className="md:hidden z-[60] relative"
             >
               <motion.div
                 animate={{ rotate: isMenuOpen ? 90 : 0 }}
@@ -105,36 +89,31 @@ export default function Hero() {
 
             <a
               href="#agendar"
-              className="hidden md:inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] text-white rounded-full hover:shadow-lg transition-all duration-300 text-lg"
+              className="hidden md:inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] text-white rounded-full transition-all duration-300 text-lg"
             >
               Agendar Consulta <ArrowUpRight className="ml-2 h-5 w-5" />
             </a>
           </div>
         </div>
 
-        {/* Fixed Mobile Menu */}
+        {/* Mobile Menu */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div
+              variants={slideIn}
               initial="initial"
               animate="animate"
-              exit="initial"
-              variants={slideIn}
-              transition={{ type: "tween", duration: 0.3 }}
+              exit="exit"
               className="fixed top-0 left-0 right-0 bottom-0 bg-[#e9e9e9] z-[55] md:hidden flex flex-col justify-center items-center"
-              style={{ position: 'fixed', height: '100vh' }}
             >
-              <motion.nav 
-                className="flex flex-col items-center gap-8"
-                variants={staggerChildren}
-              >
+              <nav className="flex flex-col items-center gap-8">
                 {['Inicio', 'Nosotros', 'Servicios', 'Contacto'].map((item) => (
                   <motion.a
                     key={item}
                     href={`#${item.toLowerCase()}`}
                     className="text-gray-700 hover:text-[#f78d31] text-2xl font-medium"
                     onClick={() => setIsMenuOpen(false)}
-                    variants={fadeUpWithScale}
+                    variants={fadeIn}
                   >
                     {item}
                   </motion.a>
@@ -143,24 +122,22 @@ export default function Hero() {
                   href="#agendar"
                   className="mt-4 px-8 py-3 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] text-white rounded-full text-center text-xl w-48"
                   onClick={() => setIsMenuOpen(false)}
-                  variants={fadeUpWithScale}
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  variants={fadeIn}
                 >
                   Agendar Consulta
                 </motion.a>
-              </motion.nav>
+              </nav>
             </motion.div>
           )}
         </AnimatePresence>
       </header>
 
-      {/* Enhanced Hero Section with larger image */}
+      {/* Hero Section */}
       <section id="inicio" className="relative pt-32 md:pt-40 pb-20 md:pb-32 overflow-hidden">
         <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
+          variants={fadeIn}
+          initial="initial"
+          animate="animate"
           className="absolute inset-0 bg-gradient-to-br from-[#f78d31]/10 via-transparent to-transparent"
         ></motion.div>
         
@@ -168,79 +145,52 @@ export default function Hero() {
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <motion.div 
               className="flex-1 space-y-8 z-10"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              variants={fadeIn}
+              initial="initial"
+              animate="animate"
             >
               <motion.div 
                 className="inline-flex items-center px-4 py-2 rounded-full bg-white/80 backdrop-blur-sm shadow-sm text-lg text-[#f78d31] mb-4"
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.3, delay: 0.5 }}
+                variants={fadeIn}
               >
                 <Sparkles className="h-5 w-5 mr-2" />
                 Con SiCoaching...
               </motion.div>
-              <motion.h1 
-                className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-              >
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
                 Descubre tu
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f78d31] to-[#ff6b6b]"> verdadero potencial</span>
-              </motion.h1>
-              <motion.p 
-                className="text-xl text-gray-600 md:pr-12 leading-relaxed"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-              >
+              </h1>
+              <p className="text-xl text-gray-600 md:pr-12 leading-relaxed">
                 Coaching personalizado para impulsar tu desarrollo personal y profesional hacia nuevos horizontes.
-              </motion.p>
-              <motion.div 
-                className="flex flex-col sm:flex-row gap-4 pt-4"
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.5 }}
-              >
-                <motion.a
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 pt-4">
+                <a
                   href="#agendar"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] text-white rounded-full hover:shadow-lg transition-all duration-300 text-lg w-full sm:w-auto"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] text-white rounded-full transition-all duration-300 text-lg w-full sm:w-auto"
                 >
                   Comienza Ahora
                   <ArrowRight className="ml-2 h-6 w-6" />
-                </motion.a>
-                <motion.a
+                </a>
+                <a
                   href="#servicios"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-700 rounded-full hover:shadow-lg transition-all duration-300 text-lg w-full sm:w-auto"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-700 rounded-full transition-all duration-300 text-lg w-full sm:w-auto"
                 >
                   Conoce más
-                </motion.a>
-              </motion.div>
+                </a>
+              </div>
             </motion.div>
             <motion.div 
               className="flex-1 relative w-full md:w-[180%] lg:w-[200%]"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+              variants={fadeIn}
+              initial="initial"
+              animate="animate"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] rounded-full filter blur-3xl opacity-20"></div>
-              <motion.div
-                className="relative"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.3 }}
-              >
-                <img
-                  src="/Sicoaching66.png"
-                  alt="Coaching Illustration"
-                  className="w-full max-w-none md:max-w-[180%] lg:max-w-[200%] mx-auto rounded-2xl shadow-2xl"
-                />
-              </motion.div>
+              <img
+                src="/Sicoaching66.png"
+                alt="Coaching Illustration"
+                className="w-full max-w-none md:max-w-[180%] lg:max-w-[200%] mx-auto rounded-2xl shadow-2xl"
+              />
             </motion.div>
           </div>
         </div>
@@ -251,9 +201,9 @@ export default function Hero() {
         <div className="container mx-auto px-4">
           <motion.div 
             className="max-w-3xl mx-auto text-center mb-24"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            variants={fadeIn}
+            initial="initial"
+            whileInView="animate"
             viewport={{ once: true }}
           >
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#f78d31]/10 text-[#f78d31] mb-6 text-lg">
@@ -288,10 +238,10 @@ export default function Hero() {
             ].map((item, index) => (
               <motion.div 
                 key={index}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
+                className="bg-white p-8 rounded-2xl shadow-lg transition-all duration-300"
+                variants={fadeIn}
+                initial="initial"
+                whileInView="animate"
                 viewport={{ once: true }}
               >
                 <div className="w-16 h-16 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] rounded-full flex items-center justify-center text-white mb-6">
@@ -335,9 +285,9 @@ export default function Hero() {
             </div>
             <motion.div 
               className="flex-1 space-y-8 order-1 lg:order-2"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
+              variants={fadeIn}
+              initial="initial"
+              whileInView="animate"
               viewport={{ once: true }}
             >
               <h3 className="text-3xl font-bold text-gray-900 mb-6">¿Por qué elegirnos?</h3>
@@ -374,80 +324,247 @@ export default function Hero() {
       </section>
 
       {/* Services Section */}
-      <section id="servicios" className="py-24 md:py-40 bg-[#f8f9fc]">
-        <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center mb-24"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#f78d31]/10 text-[#f78d31] mb-6 text-lg">
-              <Briefcase className="h-5 w-5 mr-2" />
-              Nuestros Servicios
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
-              Soluciones de coaching a tu medida
-            </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Ofrecemos una gama completa de servicios de coaching diseñados para potenciar tu crecimiento personal y profesional.
-            </p>
-          </motion.div>
+      <section id="servicios" className="py-24 md:py-32">
+        <motion.div 
+          className="text-center mb-16"
+          variants={fadeIn}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#f78d31]/10 text-[#f78d31] mb-6 text-lg">
+            <Briefcase className="h-5 w-5 mr-2" />
+            Nuestros Servicios
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
+            Soluciones de coaching a tu medida
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            Ofrecemos una gama completa de servicios de coaching diseñados para potenciar tu crecimiento personal y profesional.
+          </p>
+        </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-            {[
-              {
-                title: "Coaching Ejecutivo",
-                description: "Desarrollo de liderazgo y habilidades directivas para profesionales.",
-                features: ["Liderazgo efectivo", "Toma de decisiones", "Gestión del tiempo"],
-                icon: <Briefcase className="w-6 h-6" />
-              },
-              {
-                title: "Coaching Personal",
-                description: "Acompañamiento para alcanzar metas y desarrollo personal.",
-                features: ["Objetivos claros", "Balance vida-trabajo", "Autoconocimiento"],
-                icon: <Users className="w-6 h-6" />
-              },
-              {
-                title: "Coaching Organizacional",
-                description: "Transformación de equipos y cultura organizacional.",
-                features: ["Trabajo en equipo", "Comunicación efectiva", "Cultura empresarial"],
-                icon: <Brain className="w-6 h-6" />
-              }
-            ].map((service, index) => (
-              <motion.div
-                key={index}
-                className="bg-white p-8 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
+        {/* Personal Coaching Section */}
+        <motion.div 
+          className="w-full bg-[#f78d31] min-h-screen flex items-center relative overflow-hidden"
+          variants={fadeIn}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <div className="container mx-auto px-4 py-24 relative">
+            <div className="flex flex-col lg:flex-row items-start gap-16">
+              <motion.div 
+                className="lg:w-1/3"
+                variants={fadeIn}
               >
-                <div className="w-16 h-16 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] rounded-xl flex items-center justify-center text-white mb-6">
-                  {service.icon}
-                </div>
-                <h3 className="text-2xl font-semibold mb-4 text-gray-900">{service.title}</h3>
-                <p className="text-gray-600 mb-6">{service.description}</p>
-                <ul className="space-y-3 mb-6">
-                  {service.features.map((feature, i) => (
-                    <li key={i} className="flex items-center text-gray-600">
-                      <CheckCircle2 className="w-5 h-5 text-[#f78d31] mr-2" />
-                      {feature}
-                    </li>
+                <img 
+                  src="/logo2.png" 
+                  alt="SiCoaching Personal" 
+                  className="w-48 mb-8"
+                />
+                <h3 className="text-4xl font-bold text-white mb-6">Coaching Personal</h3>
+                <p className="text-white/90 text-xl leading-relaxed">
+                  Descubre tu máximo potencial y alcanza tus metas personales con nuestro programa de coaching personalizado.
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                className="lg:w-2/3 space-y-8"
+                variants={fadeIn}
+              >
+                <div className="grid md:grid-cols-2 gap-8">
+                  {[
+                    {
+                      title: "Desarrollo Personal",
+                      description: "Identifica y supera limitaciones para alcanzar tu máximo potencial.",
+                      icon: <Target className="w-8 h-8 text-white" />
+                    },
+                    {
+                      title: "Balance Vida-Trabajo",
+                      description: "Encuentra el equilibrio perfecto entre tu vida personal y profesional.",
+                      icon: <Users className="w-8 h-8 text-white" />
+                    },
+                    {
+                      title: "Gestión Emocional",
+                      description: "Desarrolla inteligencia emocional y mejora tus relaciones interpersonales.",
+                      icon: <Brain className="w-8 h-8 text-white" />
+                    },
+                    {
+                      title: "Objetivos Claros",
+                      description: "Define y alcanza metas significativas en tu vida personal.",
+                      icon: <CheckCircle2 className="w-8 h-8 text-white" />
+                    }
+                  ].map((feature, index) => (
+                    <div 
+                      key={index}
+                      className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20"
+                    >
+                      <div className="mb-4">{feature.icon}</div>
+                      <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
+                      <p className="text-white/80">{feature.description}</p>
+                    </div>
                   ))}
-                </ul>
+                </div>
                 <button
-                  onClick={() => handleOpenContactForm(service.title)}
-                  className="inline-flex items-center text-white bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] px-6 py-2 rounded-lg hover:shadow-lg transition-all"
+                  onClick={() => handleOpenContactForm("Coaching Personal")}
+                  className="inline-flex items-center px-8 py-4 bg-[#001731] text-white rounded-full text-lg transition-all"
                 >
-                  Comenzar ahora
-                  <ArrowRight className="ml-2 h-5 w-5" />
+                  Comenzar mi transformación
+                  <ArrowRight className="ml-2 h-6 w-6" />
                 </button>
               </motion.div>
-            ))}
+            </div>
           </div>
-        </div>
+        </motion.div>
+
+        {/* Digital Products Section */}
+        <motion.div 
+          className="w-full bg-[#001731] min-h-screen flex items-center relative overflow-hidden"
+          variants={fadeIn}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <div className="container mx-auto px-4 py-24 relative">
+            <div className="flex flex-col lg:flex-row items-start gap-16">
+              <motion.div 
+                className="lg:w-1/3"
+                variants={fadeIn}
+              >
+                <img 
+                  src="/logo3.png" 
+                  alt="SiCoaching Digital" 
+                  className="w-48 mb-8"
+                />
+                <h3 className="text-4xl font-bold text-white mb-6">Productos Digitales</h3>
+                <p className="text-white/90 text-xl leading-relaxed">
+                  Accede a recursos y herramientas digitales diseñadas para potenciar tu desarrollo personal y profesional.
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                className="lg:w-2/3 space-y-8"
+                variants={fadeIn}
+              >
+                <div className="grid md:grid-cols-2 gap-8">
+                  {[
+                    {
+                      title: "Cursos Online",
+                      description: "Programas especializados con contenido de alta calidad.",
+                      icon: <BarChart2 className="w-8 h-8 text-[#f78d31]" />
+                    },
+                    {
+                      title: "Recursos Descargables",
+                      description: "Guías, plantillas y materiales para tu desarrollo.",
+                      icon: <ArrowRight className="w-8 h-8 text-[#f78d31]" />
+                    },
+                    {
+                      title: "Comunidad Virtual",
+                      description: "Conecta con otros profesionales en crecimiento.",
+                      icon: <Users className="w-8 h-8 text-[#f78d31]" />
+                    },
+                    {
+                      title: "Webinars",
+                      description: "Sesiones en vivo con expertos en desarrollo personal.",
+                      icon: <Zap className="w-8 h-8 text-[#f78d31]" />
+                    }
+                  ].map((feature, index) => (
+                    <div 
+                      key={index}
+                      className="bg-[#f78d31]/5 backdrop-blur-sm p-6 rounded-xl border border-[#f78d31]/20"
+                    >
+                      <div className="mb-4">{feature.icon}</div>
+                      <h4 className="text-xl font-semibold text-[#f78d31] mb-3">{feature.title}</h4>
+                      <p className="text-white/80">{feature.description}</p>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  onClick={() => handleOpenContactForm("Productos Digitales")}
+                  className="inline-flex items-center px-8 py-4 bg-[#f78d31] text-white rounded-full text-lg transition-all"
+                >
+                  Explorar recursos
+                  <ArrowRight className="ml-2 h-6 w-6" />
+                </button>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Business Coaching Section */}
+        <motion.div 
+          className="w-full bg-[#e9e9e9] min-h-screen flex items-center relative overflow-hidden"
+          variants={fadeIn}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+        >
+          <div className="container mx-auto px-4 py-24 relative">
+            <div className="flex flex-col lg:flex-row items-start gap-16">
+              <motion.div 
+                className="lg:w-1/3"
+                variants={fadeIn}
+              >
+                <img 
+                  src="/logo.png" 
+                  alt="SiCoaching Empresarial" 
+                  className="w-48 mb-8"
+                />
+                <h3 className="text-4xl font-bold text-[#001731] mb-6">Coaching Empresarial</h3>
+                <p className="text-gray-600 text-xl leading-relaxed">
+                  Transforma tu organización y desarrolla el potencial de tus equipos con nuestro programa empresarial.
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                className="lg:w-2/3 space-y-8"
+                variants={fadeIn}
+              >
+                <div className="grid md:grid-cols-2 gap-8">
+                  {[
+                    {
+                      title: "Liderazgo Efectivo",
+                      description: "Desarrolla habilidades de liderazgo transformacional.",
+                      icon: <Award className="w-8 h-8 text-[#001731]" />
+                    },
+                    {
+                      title: "Cultura Organizacional",
+                      description: "Construye una cultura empresarial sólida y positiva.",
+                      icon: <Users className="w-8 h-8 text-[#001731]" />
+                    },
+                    {
+                      title: "Gestión de Equipos",
+                      description: "Mejora la comunicación y el rendimiento de tus equipos.",
+                      icon: <Target className="w-8 h-8 text-[#001731]" />
+                    },
+                    {
+                      title: "Productividad",
+                      description: "Optimiza procesos y maximiza resultados empresariales.",
+                      icon: <BarChart2 className="w-8 h-8 text-[#001731]" />
+                    }
+                  ].map((feature, index) => (
+                    <div 
+                      key={index}
+                      className="bg-white p-6 rounded-xl shadow-lg border border-gray-100"
+                    >
+                      <div className="mb-4">{feature.icon}</div>
+                      <h4 className="text-xl font-semibold text-[#001731] mb-3">{feature.title}</h4>
+                      <p className="text-gray-600">{feature.description}</p>
+                    </div>
+                  ))}
+                </div>
+                <button
+                  onClick={() => handleOpenContactForm("Coaching Empresarial")}
+                  className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] text-white rounded-full text-lg transition-all"
+                >
+                  Transformar mi organización
+                  <ArrowRight className="ml-2 h-6 w-6" />
+                </button>
+              </motion.div>
+            </div>
+          </div>
+        </motion.div>
       </section>
 
       {/* Social Media Section */}
@@ -455,9 +572,9 @@ export default function Hero() {
         <div className="container mx-auto px-4">
           <motion.div 
             className="max-w-3xl mx-auto text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
+            variants={fadeIn}
+            initial="initial"
+            whileInView="animate"
             viewport={{ once: true }}
           >
             <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#f78d31]/10 text-[#f78d31] mb-4 text-lg">
@@ -477,13 +594,10 @@ export default function Hero() {
                 <a
                   key={index}
                   href="#"
-                  className="group relative"
+                  className="relative w-16 h-16 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] text-white rounded-full flex items-center justify-center transition-transform duration-300 hover:scale-110"
                   aria-label={social.label}
                 >
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="relative w-16 h-16 bg-gradient-to-r from-[#f78d31] to-[#ff6b6b] text-white rounded-full flex items-center justify-center transform transition-transform group-hover:scale-110">
-                    {social.icon}
-                  </div>
+                  {social.icon}
                 </a>
               ))}
             </div>
