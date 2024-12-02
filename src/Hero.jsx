@@ -1,7 +1,7 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import { Menu, X, Target, Users, Briefcase, Brain, ArrowRight, Instagram, Linkedin, Mail, Sparkles, ArrowUpRight, CheckCircle2, Star, BarChart2, Zap, Award } from 'lucide-react'
+import React, { useState, useEffect, useRef } from 'react'
+import { Menu, X, Target, Users, Briefcase, Brain, ArrowRight, Instagram, Linkedin, Mail, Sparkles, ArrowUpRight, CheckCircle2, Star, BarChart2, Zap, Award, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ContactFormPopup from './ContactFormPopup'
 
@@ -9,11 +9,28 @@ export default function Page() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isContactFormOpen, setIsContactFormOpen] = useState(false)
   const [selectedService, setSelectedService] = useState('')
+  const [currentTestimonial, setCurrentTestimonial] = useState(0)
+  const videoRef = useRef(null)
 
   useEffect(() => {
     document.body.style.overflow = isMenuOpen ? 'hidden' : 'unset'
   }, [isMenuOpen])
 
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.playbackRate = 1; // Slow down the video
+    }
+  }, [])
+  // Auto-scroll testimonials
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTestimonial((prev) => 
+        prev === testimonials.length - 1 ? 0 : prev + 1
+      )
+    }, 5000)
+
+    return () => clearInterval(timer)
+  }, [])
   const handleOpenContactForm = (serviceTitle) => {
     setSelectedService(serviceTitle)
     setIsContactFormOpen(true)
@@ -38,10 +55,34 @@ export default function Page() {
     }
   }
 
+  const testimonials = [
+    {
+      name: "Marcelo",
+      role: "Cliente Personal",
+      content: "Realizar un proceso de coaching personal guiado con Cecilia fue una experiencia transformadora. Desde el primer momento, su enfoque profesional empático y su habilidad intuitiva para comprender mis necesidades me ayudaron a conectar profundamente con el proceso. Su capacidad profesional y objetividad me permitieron ver mis desafíos desde una perspectiva más clara, sin juicios, y me dio el impulso necesario para superar mis propias barreras."
+    },
+    {
+      name: "Ileana",
+      role: "Rossonero Rodeos de Cría",
+      content: "Desde que Ceci llegó a mi vida, he experimentado una transformación profunda y significativa, tanto en el ámbito personal como en el profesional. A través del proceso, no solo logré ordenar mis ideas y metas, sino que también me sentí acompañada en cada paso, lo cual resultó invaluable en momentos de desafío."
+    },
+    {
+      name: "Marcelo",
+      role: "Laboratorios Pierabella",
+      content: "Al realizar un proceso de coaching en nuestra empresa guiado por Cecilia Ortiz y Daniel Bütikofer, experimentamos cambios notables en el ambiente de trabajo y en el rendimiento general del equipo. El proceso nos ayudó a fortalecer la comunicación entre el equipo, permitiéndonos identificar áreas de mejora y fomentar un clima de confianza y apertura."
+    },
+    {
+      name: "Florencia",
+      role: "MOOD HR",
+      content: "En MOOD HR, creemos en el poder del acompañamiento personalizado para transformar las organizaciones. La incorporación de un coach a nuestro equipo nos ha permitido llevar nuestra propuesta de valor a un nuevo nivel, integrando un enfoque más profundo y estratégico en el desarrollo del talento humano."
+    }
+  ]
+
+
   return (
     <div className="min-h-screen bg-[#e9e9e9] overflow-hidden font-poppins">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 bg-[#e9e9e9]/90 backdrop-blur-md z-50 h-32 border-t-2 border-[#f78d31]">
+      <header className="fixed top-0 left-0 right-0 bg-[#e9e9e9] backdrop-blur-md z-50 h-32 border-t-2 border-[#f78d31]">
         <div className="container mx-auto px-4 h-full relative">
           <div className="flex items-center justify-between h-full">
             <motion.div 
@@ -51,9 +92,9 @@ export default function Page() {
               transition={{ duration: 0.5 }}
             >
               <img 
-                src="/logoo.png" 
+                src="/logo.png" 
                 alt="SiCoaching Logo" 
-                className="h-80 mt-16"
+                className="h-64 mt-16"
               />
             </motion.div>
             
@@ -145,89 +186,141 @@ export default function Page() {
       </header>
 
       {/* Hero Section */}
-      <section id="inicio" className="relative pt-40 pb-20 md:pb-32 overflow-hidden">
-        <motion.div 
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1 }}
-          className="absolute inset-0 bg-gradient-to-br from-[#f78d31]/10 via-transparent to-transparent"
-        ></motion.div>
-        
-        <div className="container mx-auto px-4 relative">
-          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <motion.div 
-              className="flex-1 space-y-8 z-10"
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
+      <section id="inicio" className="relative h-screen overflow-hidden">
+      <div className="absolute inset-0 bg-gray-900/50 z-10"></div>
+      <video 
+        ref={videoRef}
+        autoPlay 
+        loop 
+        muted 
+        playsInline
+        className="absolute inset-0 w-full h-full object-cover"
+      >
+        <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/inicio1-gtKmyc2Rmc0vDJYAq9slBRJ1GSdLAS.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+      
+      <div className="relative z-20 h-full flex items-center justify-center mt-20 md:mt-32">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8">
+            <motion.div
+              className="flex flex-col space-y-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight">
-                Descubre tu
-                <span className="text-[#f78d31]"> verdadero potencial</span>
+              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+                Impulsa <span className="text-[#f78d31]">tu empresa</span>
               </h1>
-              <p className="text-xl text-gray-600 md:pr-12 leading-relaxed">
-                Coaching personalizado para impulsar tu desarrollo personal y profesional hacia nuevos horizontes.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <motion.a
-                  href="#agendar"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-[#f78d31] text-white rounded-full transition-all duration-300 text-lg w-full sm:w-auto"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Comienza Ahora
-                  <ArrowRight className="ml-2 h-6 w-6" />
-                </motion.a>
-                <motion.a
-                  href="#servicios"
-                  className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-700 rounded-full transition-all duration-300 text-lg w-full sm:w-auto"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                >
-                  Conoce más
-                </motion.a>
-              </div>
+              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+                Transforma <span className="text-[#f78d31]">el presente</span>
+              </h1>
+              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+                Crea <span className="text-[#f78d31]">futuro</span>
+              </h1>
             </motion.div>
-            <motion.div 
-              className="flex-1 relative w-full md:w-[180%] lg:w-[200%]"
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            
+            <motion.p 
+              className="text-xl text-white/90 max-w-2xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.4 }}
             >
-              <div className="absolute inset-0 bg-[#f78d31] rounded-full filter blur-3xl opacity-20"></div>
-              <img
-                src="/meeting.jpg"
-                alt="Coaching Session"
-                className="w-full max-w-none md:max-w-[180%] lg:max-w-[200%] mx-auto rounded-2xl shadow-2xl"
-              />
+              Si Coaching, especialistas en facilitar procesos de mejora y transformación
+            </motion.p>
+            
+            <motion.div 
+              className="flex flex-col sm:flex-row gap-4 pt-8"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
+              <a
+                href="#agendar"
+                className="inline-flex items-center justify-center px-8 py-4 bg-[#f78d31] text-white rounded-full transition-all duration-300 text-lg hover:bg-[#e67d21]"
+              >
+                Comienza Ahora
+                <ArrowRight className="ml-2 h-6 w-6" />
+              </a>
+              <a
+                href="#servicios"
+                className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-800 rounded-full transition-all duration-300 text-lg hover:bg-gray-100"
+              >
+                Conoce más
+              </a>
             </motion.div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+      {/* Testimonials Section */}
+      <section className="py-24 bg-white overflow-hidden">
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-16">Lo que dicen nuestros clientes</h2>
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              <div className="overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentTestimonial}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    transition={{ duration: 0.5 }}
+                    className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-lg border border-gray-100"
+                  >
+                    <div className="flex flex-col items-center text-center">
+                      <div className="w-20 h-20 bg-[#f78d31] rounded-full flex items-center justify-center text-white text-3xl font-bold mb-6">
+                        {testimonials[currentTestimonial].name[0]}
+                      </div>
+                      <p className="text-gray-600 text-lg mb-8 leading-relaxed">
+                        {testimonials[currentTestimonial].content}
+                      </p>
+                      <div>
+                        <h3 className="font-semibold text-xl text-gray-900">
+                          {testimonials[currentTestimonial].name}
+                        </h3>
+                        <p className="text-[#f78d31] font-medium">
+                          {testimonials[currentTestimonial].role}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+              
+              {/* Progress Indicators */}
+              <div className="flex justify-center gap-2 mt-8">
+                {testimonials.map((_, index) => (
+                  <div
+                    key={index}
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial 
+                        ? 'w-8 bg-[#f78d31]' 
+                        : 'w-2 bg-gray-300'
+                    }`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
       {/* About Us Section */}
       <section id="nosotros" className="py-24 md:py-40 bg-white">
-      <div className="container mx-auto px-4">
-        <motion.div 
-          className="max-w-3xl mx-auto text-center mb-16"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#f78d31]/10 text-[#f78d31] mb-6 text-lg">
-            <Users className="h-5 w-5 mr-2" />
-            Sobre Nosotros
+        <div className="container mx-auto px-4">
+          <div className="max-w-3xl mx-auto text-center mb-24">
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#f78d31]/10 text-[#f78d31] mb-6 text-lg">
+              <Users className="h-5 w-5 mr-2" />
+              Sobre Nosotros
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900 whitespace-nowrap">
+              Experiencia, Vocación y Competencia
+            </h2>
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
-            Transformando vidas a través del coaching
-          </h2>
-          <p className="text-xl text-gray-600 leading-relaxed">
-            Con más de una década de experiencia, nos dedicamos a impulsar el crecimiento personal y profesional de nuestros clientes.
-          </p>
-        </motion.div>
-
-        <div className="grid md:grid-cols-2 gap-12 mb-24 items-center">
+          <div className="grid md:grid-cols-2 gap-12 mb-24 items-center">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -261,121 +354,122 @@ export default function Page() {
             className="space-y-8"
           >
             <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Nuestra Misión</h3>
-              <p className="text-gray-600 leading-relaxed">
-                En SiCoaching, nuestra misión es empoderar a individuos y organizaciones para que alcancen su máximo potencial. 
-                Nos dedicamos a proporcionar herramientas de coaching de alta calidad y un acompañamiento personalizado que 
-                inspire el crecimiento personal y profesional, fomentando el desarrollo de líderes conscientes y equipos altamente efectivos.
-              </p>
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Nuestra Visión</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Aspiramos a ser reconocidos como líderes innovadores en el campo del coaching, creando un impacto positivo y duradero 
-                en la vida de las personas y en la cultura de las organizaciones. Visualizamos un mundo donde cada individuo tiene 
-                la oportunidad de descubrir y maximizar sus talentos, contribuyendo así a una sociedad más consciente y próspera.
+              <h3 className="text-4xl font-bold text-gray-900 mb-4">Nuestro propósito</h3>
+              <p className="text-gray-600 leading-relaxed text-xl">
+                Impulsar procesos de mejora y transformación en las empresas.
+                Potenciar el desarrollo de las personas para que formen mejores equipos de trabajo.
+                Brindar herramientas para diseñar futuro.
               </p>
             </div>
           </motion.div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-12 mb-24">
-          {[
-            {
-              name: "María Cecilia Ortiz",
-              role: "Master Coach Ontológico Profesional",
-              image: "/maria-cecilia-ortiz.jpg",
-              qualifications: [
-                "Master Coach Ontológico Profesional - Asociación Argentina de Coaching Ontológico Profesional.",
-                "Formación en Gestión de Proyectos con Impacto Social - Banco Interamericano de Desarrollo.",
-                "Focusing Trainer - Empowerser.com",
-                "Formación en Liderazgo Sistémico HS. - Ángel Lope + Instituto de Transformación y Coaching de Rosario.",
-                "Coordinadora y docente en Formaciones de Liderazgo y Coaching, del Instituto de Transformación y Coaching de Rosario.",
-                "Coordinadora y docente en Postítulo Coaching en Organizaciones del Instituto de Transformación y Coaching de Rosario.",
-                "14 años de experiencia en procesos de Coaching Personal y Organizacional.",
-                "Experiencia internacional en conducción de equipos y logística de eventos en la industria cinematográfica - Brasil."
-              ]
-            },
-            {
-              name: "Daniel Butikofer",
-              role: "Coach Ontológico Profesional",
-              image: "/daniel-butikofer.jpg",
-              qualifications: [
-                "Coach Ontológico Profesional - Asociación Argentina de Coaching Ontológico Profesional.",
-                "Postítulo Coaching en Organizaciones - Instituto de Transformación y Coaching de Rosario.",
-                "Contador Público - Mat. Prof. CPCEPSFe II Nro. 13.113.",
-                "Posgrado en Especialización en Costos y Gestión Empresarial.",
-                "Actual Administrador General del Hospital General San Martin de Firmat.",
-                "Titular de Estudio Butikofer - Ciencias Económicas.",
-                "20 años asesorando empresas en áreas de Impuestos, Laboral y Societario y Administración Contable.",
-                "Especializado en coaching de equipos y coaching ejecutivo.",
-                "Guardavidas profesional."
-              ]
-            }
-          ].map((coach, index) => (
-            <motion.div 
-              key={index} 
-              className="bg-white p-8 rounded-2xl shadow-lg transition-all duration-300 border border-[#f78d31]"
+            {[
+               {
+                name: "María Cecilia Ortiz",
+                role: "Master Coach Ontológico Profesional",
+                image: "/fotocecilia.jpg",
+                qualifications: [
+                  "Master Coach Ontológico Profesional - Asociación Argentina de Coaching Ontológico Profesional.",
+                  "Formación en Gestión de Proyectos con Impacto Social - Banco Interamericano de Desarrollo.",
+                  "Focusing Trainer - Empowerser.com",
+                  "Formación en Liderazgo Sistémico HS. - Ángel Lope + Instituto de Transformación y Coaching de Rosario.",
+                  "Coordinadora y docente en Formaciones de Liderazgo y Coaching, del Instituto de Transformación y Coaching de Rosario.",
+                  "Coordinadora y docente en Postítulo Coaching en Organizaciones del Instituto de Transformación y Coaching de Rosario.",
+                  "14 años de experiencia en procesos de Coaching Personal y Organizacional.",
+                  "Experiencia internacional en conducción de equipos y logística de eventos en la industria cinematográfica - Brasil."
+                ]
+              },
+              {
+                name: "Daniel Butikofer",
+                role: "Coach Ontológico Profesional",
+                image: "/fotodaniel.jpeg",
+                qualifications: [
+                  "Coach Ontológico Profesional - Asociación Argentina de Coaching Ontológico Profesional.",
+                  "Postítulo Coaching en Organizaciones - Instituto de Transformación y Coaching de Rosario.",
+                  "Contador Público - Mat. Prof. CPCEPSFe II Nro. 13.113.",
+                  "Posgrado en Especialización en Costos y Gestión Empresarial.",
+                  "Actual Administrador General del Hospital General San Martin de Firmat.",
+                  "Titular de Estudio Butikofer - Ciencias Económicas.",
+                  "20 años asesorando empresas en áreas de Impuestos, Laboral y Societario y Administración Contable.",
+                  "Especializado en coaching de equipos y coaching ejecutivo.",
+                  "Guardavidas profesional."
+                ]
+              }
+            ].map((coach, index) => (
+              <motion.div 
+              key={index}
+              className="bg-white shadow-lg overflow-hidden border border-[#f78d31] p-6"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               viewport={{ once: true }}
             >
-              <div className="flex items-center mb-6">
-                <img src={coach.image} alt={coach.name} className="w-24 h-24 rounded-full mr-4 object-cover" />
-                <div>
-                  <h3 className="text-2xl font-bold text-gray-900">{coach.name}</h3>
-                  <p className="text-[#f78d31] font-semibold">{coach.role}</p>
+              <div className="flex flex-col items-center">
+                <div className="w-72 h-72 mb-6 overflow-hidden border-2 border-[#f78d31]">
+                  <img 
+                    src={coach.image} 
+                    alt={coach.name} 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
+                <h3 className="text-3xl font-bold text-gray-900 mb-2">{coach.name}</h3>
+                <p className="text-xl text-[#f78d31] font-semibold mb-4">{coach.role}</p>
               </div>
-              <ul className="list-disc list-inside text-gray-600 space-y-2">
-                {coach.qualifications.map((qualification, i) => (
-                  <li key={i}>{qualification}</li>
-                ))}
-              </ul>
+              <div className="mt-4">
+                <ul className="space-y-2">
+                  {coach.qualifications.map((qualification, i) => (
+                    <li key={i} className="flex items-start gap-2">
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#f78d31] mt-1.5 flex-shrink-0" />
+                      <span className="text-base text-gray-600">{qualification}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </motion.div>
-          ))}
-        </div>
-
-        <div className="text-center">
-          <h3 className="text-3xl font-bold text-gray-900 mb-12">¿Por qué elegirnos?</h3>
-          <div className="grid md:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Experiencia Comprobada",
-                description: "Más de una década transformando vidas con resultados medibles y sostenibles.",
-                icon: <Users className="w-6 h-6" />
-              },
-              {
-                title: "Metodología Única",
-                description: "Enfoque personalizado adaptado a las necesidades específicas de cada cliente.",
-                icon: <Brain className="w-6 h-6" />
-              },
-              {
-                title: "Compromiso Total",
-                description: "Nuestro compromiso es el éxito y la satisfacción de cada uno de nuestros clientes.",
-                icon: <CheckCircle2 className="w-6 h-6" />
-              }
-            ].map((item, index) => (
-              <motion.div 
-                key={index} 
-                className="bg-gray-50 p-8 rounded-xl"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-              >
-                <div className="w-16 h-16 bg-[#f78d31] rounded-full flex items-center justify-center text-white mx-auto mb-6">
-                  {item.icon}
-                </div>
-                <h4 className="text-xl font-semibold mb-4 text-gray-900">{item.title}</h4>
-                <p className="text-gray-600">{item.description}</p>
-              </motion.div>
             ))}
           </div>
+
+          <div className="text-center">
+            <h3 className="text-3xl font-bold text-gray-900 mb-6">¿Por qué elegirnos?</h3>
+            <div className="grid md:grid-cols-3 gap-8">
+              {[
+                {
+                  title: "Experiencia Comprobada",
+                  description: "Más de una década transformando vidas con resultados medibles y sostenibles.",
+                  icon: <Users className="w-6 h-6" />
+                },
+                {
+                  title: "Atención Personalizada",
+                  description: "Actividades y enfoques adaptados a las necesidades específicas de cada cliente.",
+                  icon: <Brain className="w-6 h-6" />
+                },
+                {
+                  title: "Compromiso Total",
+                  description: "Constante actualización profesional para brindar soluciones prácticas e innovadoras.",
+                  icon: <CheckCircle2 className="w-6 h-6" />
+                }
+              ].map((item, index) => (
+                <motion.div 
+                  key={index} 
+                  className="bg-gray-50 p-6 rounded-xl"
+                initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  viewport={{ once: true }}
+                >
+                  <div className="w-12 h-12 bg-[#f78d31] rounded-full flex items-center justify-center text-white mx-auto mb-4">
+                    {item.icon}
+                  </div>
+                  <h4 className="text-xl font-semibold mb-2 text-gray-900">{item.title}</h4>
+                  <p className="text-gray-600">{item.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Services Section */}
       <section id="servicios" className="py-24 md:py-32">
@@ -391,10 +485,10 @@ export default function Page() {
             Nuestros Servicios
           </div>
           <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900">
-            Soluciones de coaching a tu medida
+            Soluciones focalizadas
           </h2>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Ofrecemos una gama completa de servicios de coaching diseñados para potenciar tu crecimiento personal y profesional.
+            Ofrecemos una gama completa de servicios de coaching para impulsar el fortalecimiento organizacional y personal.
           </p>
         </motion.div>
 
@@ -683,14 +777,14 @@ export default function Page() {
               {
                 icon: <Instagram className="w-12 h-12" />,
                 name: "Instagram",
-                handle: "@sicoaching",
+                handle: "@sicoaching1",
                 href: "https://instagram.com/sicoaching",
                 color: "bg-gradient-to-br from-purple-600 to-pink-500"
               },
               {
                 icon: <Linkedin className="w-12 h-12" />,
                 name: "LinkedIn",
-                handle: "SiCoaching",
+                handle: "Maria Cecilia Ortiz",
                 href: "https://linkedin.com/company/sicoaching",
                 color: "bg-[#0077b5]"
               },
