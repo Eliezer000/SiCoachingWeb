@@ -316,7 +316,7 @@ export default function Page() {
               <Users className="h-5 w-5 mr-2" />
               Sobre Nosotros
             </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900 whitespace-nowrap">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8 text-gray-900 md:whitespace-nowrap">
               Experiencia, Vocación y Competencia
             </h2>
           </div>
