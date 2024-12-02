@@ -200,7 +200,7 @@ export default function Page() {
         Your browser does not support the video tag.
       </video>
       
-      <div className="relative z-20 h-full flex items-center justify-center mt-20 md:mt-32">
+      <div className="relative z-20 h-full flex items-center justify-center mt-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col items-center text-center max-4xl mx-auto space-y-1 md:space-y-8">
             <motion.div
