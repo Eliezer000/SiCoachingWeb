@@ -94,7 +94,7 @@ export default function Page() {
               <img 
                 src="/logo.png" 
                 alt="SiCoaching Logo" 
-                className="h-64 mt-16"
+                className="h-48 md:h-64 mt-16"
               />
             </motion.div>
             
@@ -202,26 +202,26 @@ export default function Page() {
       
       <div className="relative z-20 h-full flex items-center justify-center mt-20 md:mt-32">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center text-center max-w-4xl mx-auto space-y-8">
+          <div className="flex flex-col items-center text-center max-4xl mx-auto space-y-1 md:space-y-8">
             <motion.div
               className="flex flex-col space-y-8"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+              <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight">
                 Impulsa <span className="text-[#f78d31]">tu empresa</span>
               </h1>
-              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+              <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight">
                 Transforma <span className="text-[#f78d31]">el presente</span>
               </h1>
-              <h1 className="text-5xl md:text-7xl font-bold text-white leading-tight">
+              <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight">
                 Crea <span className="text-[#f78d31]">futuro</span>
               </h1>
             </motion.div>
             
             <motion.p 
-              className="text-xl text-white/90 max-w-2xl"
+              className="text-lg md:text-xl text-white/90 max-w-2xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
@@ -237,14 +237,14 @@ export default function Page() {
             >
               <a
                 href="#agendar"
-                className="inline-flex items-center justify-center px-8 py-4 bg-[#f78d31] text-white rounded-full transition-all duration-300 text-lg hover:bg-[#e67d21]"
+                className="inline-flex items-center justify-center px-4 py-2 md:px-8 md:py-4 bg-[#f78d31] text-white rounded-full transition-all duration-300 text-base md:text-lg hover:bg-[#e67d21]"
               >
                 Comienza Ahora
                 <ArrowRight className="ml-2 h-6 w-6" />
               </a>
               <a
                 href="#servicios"
-                className="inline-flex items-center justify-center px-8 py-4 bg-white text-gray-800 rounded-full transition-all duration-300 text-lg hover:bg-gray-100"
+                className="inline-flex items-center justify-center px-4 py-2 md:px-8 md:py-4 bg-white text-gray-800 rounded-full transition-all duration-300 text-base md:text-lg hover:bg-gray-100"
               >
                 Conoce más
               </a>
