@@ -255,9 +255,9 @@ export default function Page() {
     </section>
 
       {/* Testimonials Section */}
-      <section className="py-24 bg-white overflow-hidden">
+      <section className="py-24 bg-gradient-to-b from-white to-gray-50">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">Lo que dicen nuestros clientes</h2>
+          <h2 className="text-4xl font-bold text-center mb-16 text-gray-800">Lo que dicen nuestros clientes</h2>
           <div className="max-w-4xl mx-auto">
             <div className="relative">
               <div className="overflow-hidden">
@@ -268,14 +268,14 @@ export default function Page() {
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: -20 }}
                     transition={{ duration: 0.5 }}
-                    className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-lg border border-gray-100"
+                    className="bg-white rounded-2xl p-8 shadow-xl"
                   >
                     <div className="flex flex-col items-center text-center">
-                      <div className="w-20 h-20 bg-[#f78d31] rounded-full flex items-center justify-center text-white text-3xl font-bold mb-6">
+                      <div className="w-20 h-20 bg-gradient-to-br from-[#f78d31] to-[#f7a331] rounded-full flex items-center justify-center text-white text-3xl font-bold mb-6">
                         {testimonials[currentTestimonial].name[0]}
                       </div>
-                      <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-                        {testimonials[currentTestimonial].content}
+                      <p className="text-gray-700 text-lg mb-8 leading-relaxed italic">
+                        "{testimonials[currentTestimonial].content}"
                       </p>
                       <div>
                         <h3 className="font-semibold text-xl text-gray-900">
@@ -290,16 +290,17 @@ export default function Page() {
                 </AnimatePresence>
               </div>
               
-              {/* Progress Indicators */}
               <div className="flex justify-center gap-2 mt-8">
                 {testimonials.map((_, index) => (
-                  <div
+                  <button
                     key={index}
-                    className={`h-2 rounded-full transition-all duration-300 ${
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`h-3 rounded-full transition-all duration-300 ${
                       index === currentTestimonial 
                         ? 'w-8 bg-[#f78d31]' 
-                        : 'w-2 bg-gray-300'
+                        : 'w-3 bg-gray-300'
                     }`}
+                    aria-label={`Go to testimonial ${index + 1}`}
                   />
                 ))}
               </div>
@@ -432,37 +433,37 @@ export default function Page() {
           </div>
 
           <div className="text-center">
-            <h3 className="text-3xl font-bold text-gray-900 mb-6">¿Por qué elegirnos?</h3>
+            <h3 className="text-3xl font-bold text-gray-900 mb-12">¿Por qué elegirnos?</h3>
             <div className="grid md:grid-cols-3 gap-8">
               {[
                 {
                   title: "Experiencia Comprobada",
                   description: "Más de una década transformando vidas con resultados medibles y sostenibles.",
-                  icon: <Users className="w-6 h-6" />
+                  icon: <Users className="w-8 h-8" />
                 },
                 {
                   title: "Atención Personalizada",
                   description: "Actividades y enfoques adaptados a las necesidades específicas de cada cliente.",
-                  icon: <Brain className="w-6 h-6" />
+                  icon: <Brain className="w-8 h-8" />
                 },
                 {
                   title: "Compromiso Total",
                   description: "Constante actualización profesional para brindar soluciones prácticas e innovadoras.",
-                  icon: <CheckCircle2 className="w-6 h-6" />
+                  icon: <CheckCircle2 className="w-8 h-8" />
                 }
               ].map((item, index) => (
                 <motion.div 
                   key={index} 
-                  className="bg-gray-50 p-6 rounded-xl"
-                initial={{ opacity: 0, y: 20 }}
+                  className="bg-white p-8 rounded-xl shadow-lg border border-gray-100"
+                  initial={{ opacity: 0, y: 20 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1 }}
                   viewport={{ once: true }}
                 >
-                  <div className="w-12 h-12 bg-[#f78d31] rounded-full flex items-center justify-center text-white mx-auto mb-4">
+                  <div className="w-16 h-16 bg-[#f78d31]/10 rounded-full flex items-center justify-center text-[#f78d31] mx-auto mb-6">
                     {item.icon}
                   </div>
-                  <h4 className="text-xl font-semibold mb-2 text-gray-900">{item.title}</h4>
+                  <h4 className="text-xl font-semibold mb-4 text-gray-900">{item.title}</h4>
                   <p className="text-gray-600">{item.description}</p>
                 </motion.div>
               ))}
@@ -751,71 +752,56 @@ export default function Page() {
         </motion.div>
       </section>
       
-      {/* Contact Section */}
-      <section id="contacto" className="py-24 md:py-40 bg-white">
+     {/* Contact Section */}
+     <section id="contacto" className="py-24 bg-white">
         <div className="container mx-auto px-4">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-[#f78d31]/10 text-[#f78d31] mb-6 text-lg">
-              Conecta con Nosotros
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-              Síguenos en Redes Sociales
-            </h2>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Únete a nuestra comunidad y mantente al día con nuestros últimos contenidos, eventos y recursos de desarrollo personal y profesional.
+            <h2 className="text-4xl font-bold mb-4">Contáctanos</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Estamos aquí para ayudarte en tu viaje de transformación. Conéctate con nosotros y da el primer paso hacia tu crecimiento.
             </p>
           </motion.div>
-
-          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
             {[
               {
                 icon: <Instagram className="w-12 h-12" />,
-                name: "Instagram",
+                platform: "Instagram",
                 handle: "@sicoaching1",
-                href: "https://instagram.com/sicoaching",
-                color: "bg-gradient-to-br from-purple-600 to-pink-500"
+                link: "https://instagram.com/sicoaching"
               },
               {
                 icon: <Linkedin className="w-12 h-12" />,
-                name: "LinkedIn",
+                platform: "LinkedIn",
                 handle: "Maria Cecilia Ortiz",
-                href: "https://linkedin.com/company/sicoaching",
-                color: "bg-[#0077b5]"
+                link: "https://linkedin.com/company/sicoaching"
               },
               {
                 icon: <Mail className="w-12 h-12" />,
-                name: "Email",
+                platform: "Email",
                 handle: "info@sicoaching.com",
-                href: "mailto:info@sicoaching.com",
-                color: "bg-[#f78d31]"
+                link: "mailto:info@sicoaching.com"
               }
-            ].map((platform, index) => (
+            ].map((contact, index) => (
               <motion.a
                 key={index}
-                href={platform.href}
+                href={contact.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`group relative overflow-hidden rounded-2xl ${platform.color} p-12 transition-all hover:scale-105`}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="flex items-center justify-center p-6 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors"
               >
-                <div className="absolute inset-0 bg-black/10 opacity-0 transition-opacity group-hover:opacity-100" />
-                <div className="relative z-10 flex flex-col items-center text-center">
-                  <div className="mb-6 rounded-full bg-white p-4">
-                    {React.cloneElement(platform.icon, { className: `w-12 h-12 ${platform.color === 'bg-[#f78d31]' ? 'text-[#f78d31]' : 'text-current'}` })}
-                  </div>
-                  <h3 className="mb-2 text-2xl font-bold text-white">{platform.name}</h3>
-                  <p className="text-white/90 text-lg">{platform.handle}</p>
+                <div className="mr-4 text-[#f78d31]">{contact.icon}</div>
+                <div>
+                  <h3 className="font-semibold">{contact.platform}</h3>
+                  <p className="text-gray-600">{contact.handle}</p>
                 </div>
-                <ArrowRight className="absolute bottom-4 right-4 h-6 w-6 text-white opacity-0 transition-opacity group-hover:opacity-100" />
               </motion.a>
             ))}
           </div>
