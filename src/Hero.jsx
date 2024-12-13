@@ -4,6 +4,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { Menu, X, Target, Users, Briefcase, Brain, ArrowRight, Instagram, Linkedin, Mail, Sparkles, ArrowUpRight, CheckCircle2, Star, BarChart2, Zap, Award, ChevronLeft, ChevronRight } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ContactFormPopup from './ContactFormPopup'
+import { MobileMenu } from './MobileMenu'
 
 export default function Page() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -58,27 +59,27 @@ export default function Page() {
   const testimonials = [
     {
       name: "Marcelo",
-      role: "Couching Personal",
+      role: "Coaching Personal",
       content: "Realizar un proceso de coaching personal guiado con Cecilia fue una experiencia transformadora. Desde el primer momento, su enfoque profesional empático y su habilidad intuitiva para comprender mis necesidades me ayudaron a conectar profundamente con el proceso. Su capacidad profesional y objetividad me permitieron ver mis desafíos desde una perspectiva más clara, sin juicios, y me dio el impulso necesario para superar mis propias barreras."
     },
     {
       name: "Ileana",
-      role: "Couching Ejecutivo",
+      role: "Coaching Ejecutivo",
       content: "Desde que Ceci llegó a mi vida, he experimentado una transformación profunda y significativa, tanto en el ámbito personal como en el profesional. A través del proceso, no solo logré ordenar mis ideas y metas, sino que también me sentí acompañada en cada paso, lo cual resultó invaluable en momentos de desafío."
     },
     {
       name: "Marcelo",
-      role: "Couching Personal",
+      role: "Coaching Personal",
       content: "Al realizar un proceso de coaching en nuestra empresa guiado por Cecilia Ortiz y Daniel Bütikofer, experimentamos cambios notables en el ambiente de trabajo y en el rendimiento general del equipo. El proceso nos ayudó a fortalecer la comunicación entre el equipo, permitiéndonos identificar áreas de mejora y fomentar un clima de confianza y apertura."
     },
     {
-      name: "Manuel",
-      role: "Couching Personal",
+      name: "Manuela",
+      role: "Coaching Personal",
       content: "Tu acompañamiento me brindó el espacio necesario para poder mirarme honestamente, fue simple y profundo. De alguna manera fue quitar piel vieja para poder vivir desde la mía propiaFue un proceso corto, concentrado y muy profundo, te diría quirúrgicamente amoroso.. Y poderoso, me permitió acceder a una expansiva paz, algo que hacia mucho tiempo que no experimentaba."
     },
     {
       name: "Florencia",
-      role: "...",
+      role: "Coaching Organizacional",
       content: "En MOOD HR, creemos en el poder del acompañamiento personalizado para transformar las organizaciones. La incorporación de un coach a nuestro equipo nos ha permitido llevar nuestra propuesta de valor a un nuevo nivel, integrando un enfoque más profundo y estratégico en el desarrollo del talento humano."
     }
   ]
@@ -87,7 +88,7 @@ export default function Page() {
   return (
     <div className="min-h-screen bg-[#e9e9e9] overflow-hidden font-poppins">
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 bg-[#e9e9e9] backdrop-blur-md z-50 h-32 border-t-2 border-[#f78d31]">
+      <header className="fixed top-0 left-0 right-0 bg-[#e9e9e9] backdrop-blur-md z-40 h-32 border-t-2 border-[#f78d31]">
         <div className="container mx-auto px-4 h-full relative">
           <div className="flex items-center justify-between h-full">
             <motion.div 
@@ -123,141 +124,80 @@ export default function Page() {
               >
                 Agendar Consulta <ArrowUpRight className="ml-2 h-5 w-5" />
               </a>
-              <button 
-                onClick={() => setIsMenuOpen(!isMenuOpen)} 
-                className="md:hidden z-50 relative p-2 ml-4"
-                aria-label={isMenuOpen ? "Cerrar menú" : "Abrir menú"}
-              >
-                <AnimatePresence mode="wait">
-                  {isMenuOpen ? (
-                    <motion.div
-                      key="close"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <X className="h-8 w-8 text-[#f78d31]" />
-                    </motion.div>
-                  ) : (
-                    <motion.div
-                      key="menu"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Menu className="h-8 w-8 text-[#f78d31]" />
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </button>
+              <MobileMenu />
             </div>
           </div>
         </div>
-
-        {/* Mobile Menu */}
-        <AnimatePresence>
-          {isMenuOpen && (
-            <motion.div
-              initial="closed"
-              animate="open"
-              exit="closed"
-              variants={menuVariants}
-              className="fixed inset-y-0 right-0 w-full bg-[#e9e9e9] z-40 flex flex-col items-center justify-center md:hidden"
-            >
-              <nav className="flex flex-col items-center gap-8">
-                {['Inicio', 'Nosotros', 'Servicios', 'Contacto'].map((item) => (
-                  <a
-                    key={item}
-                    href={`#${item.toLowerCase()}`}
-                    className="text-2xl font-medium text-gray-800 hover:text-[#f78d31] transition-colors"
-                    onClick={() => setIsMenuOpen(false)}
-                  >
-                    {item}
-                  </a>
-                ))}
-                <a
-                  href="https://wa.link/5qifes"
-                  className="mt-4 px-8 py-3 bg-[#f78d31] text-white rounded-full text-xl"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  Agendar Consulta
-                </a>
-              </nav>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </header>
 
       {/* Hero Section */}
       <section id="inicio" className="relative h-screen overflow-hidden">
-      <div className="absolute inset-0 bg-gray-900/50 z-10"></div>
-      <video 
-        ref={videoRef}
-        autoPlay 
-        loop 
-        muted 
-        playsInline
-        className="absolute inset-0 w-full h-full object-cover"
-      >
-        <source src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/inicio1-gtKmyc2Rmc0vDJYAq9slBRJ1GSdLAS.mp4" type="video/mp4" />
-        Your browser does not support the video tag.
-      </video>
-      
-      <div className="relative z-20 h-full flex items-center justify-center mt-20">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center text-center max-4xl mx-auto space-y-1 md:space-y-8">
-            <motion.div
-              className="flex flex-col space-y-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-            >
-              <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight">
-                Impulsa <span className="text-[#f78d31]">tu empresa</span>
-              </h1>
-              <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight">
-                Transforma <span className="text-[#f78d31]">el presente</span>
-              </h1>
-              <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight">
-                Crea <span className="text-[#f78d31]">futuro</span>
-              </h1>
-            </motion.div>
-            
-            <motion.p 
-              className="text-lg md:text-xl text-white/90 max-w-2xl"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-            >
-              Si Coaching, especialistas en facilitar procesos de mejora y transformación
-            </motion.p>
-            
-            <motion.div 
-              className="flex flex-col sm:flex-row gap-4 pt-8"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-            >
-              <a
-                href="https://wa.link/5qifes"
-                className="inline-flex items-center justify-center px-4 py-2 md:px-8 md:py-4 bg-[#f78d31] text-white rounded-full transition-all duration-300 text-base md:text-lg hover:bg-[#e67d21]"
+        <div className="absolute inset-0 bg-gray-900/50 z-10"></div>
+        <video 
+          ref={videoRef}
+          autoPlay 
+          loop 
+          muted 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/inicio1.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        
+        <div className="relative z-20 h-full flex items-center justify-center mt-20">
+          <div className="container mx-auto px-4">
+            <div className="flex flex-col items-center text-center max-4xl mx-auto space-y-1 md:space-y-8">
+              <motion.div
+                className="flex flex-col space-y-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
               >
-                Comienza Ahora
-                <ArrowRight className="ml-2 h-6 w-6" />
-              </a>
-              <a
-                href="#servicios"
-                className="inline-flex items-center justify-center px-4 py-2 md:px-8 md:py-4 bg-white text-gray-800 rounded-full transition-all duration-300 text-base md:text-lg hover:bg-gray-100"
+                <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight">
+                  Impulsa <span className="text-[#f78d31]">tu empresa</span>
+                </h1>
+                <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight">
+                  Transforma <span className="text-[#f78d31]">el presente</span>
+                </h1>
+                <h1 className="text-4xl md:text-7xl font-bold text-white leading-tight">
+                  Crea <span className="text-[#f78d31]">futuro</span>
+                </h1>
+              </motion.div>
+              
+              <motion.p 
+                className="text-lg md:text-xl text-white/90 max-w-2xl"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
               >
-                Conoce más
-              </a>
-            </motion.div>
+                Si Coaching, especialistas en facilitar procesos de mejora y transformación
+              </motion.p>
+              
+              <motion.div 
+                className="flex flex-col sm:flex-row gap-4 pt-8"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.6 }}
+              >
+                <a
+                  href="https://wa.link/5qifes"
+                  className="inline-flex items-center justify-center px-4 py-2 md:px-8 md:py-4 bg-[#f78d31] text-white rounded-full transition-all duration-300 text-base md:text-lg hover:bg-[#e67d21]"
+                >
+                  Comienza Ahora
+                  <ArrowRight className="ml-2 h-6 w-6" />
+                </a>
+                <a
+                  href="#servicios"
+                  className="inline-flex items-center justify-center px-4 py-2 md:px-8 md:py-4 bg-white text-gray-800 rounded-full transition-all duration-300 text-base md:text-lg hover:bg-gray-100"
+                >
+                  Conoce más
+                </a>
+              </motion.div>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
       {/* Testimonials Section */}
       <section className="py-24 bg-gradient-to-b from-white to-gray-50">
@@ -701,7 +641,7 @@ viewport={{ once: true }}
       <div className="grid md:grid-cols-2 gap-8">
         {[
           {
-            title: "Autoconocimiento y expansión a tráves del Focousing",
+            title: "Autoconocimiento y expansión a tráves del Focusing",
             description: "Filosofía de lo implícito y práctica de Focusing para el crecimiento personal, cursado virtual.",
             icon: <BarChart2 className="w-8 h-8 text-[#001731]" />
           },
@@ -832,3 +772,4 @@ viewport={{ once: true }}
     </div>
   )
 }
+
