@@ -5,7 +5,10 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {screens: {
+      'md': '1024px', // Cambia el tamaño del breakpoint
+    },
+},
   },
   plugins: [],
 }

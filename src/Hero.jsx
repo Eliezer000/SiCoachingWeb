@@ -171,7 +171,7 @@ export default function Page() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
               >
-                Si Coaching, especialistas en facilitar procesos de mejora y transformación
+                SÍ Coaching, especialistas en facilitar procesos de mejora y transformación
               </motion.p>
               
               <motion.div 
@@ -301,11 +301,18 @@ export default function Page() {
           >
             <div>
               <h3 className="text-4xl font-bold text-gray-900 mb-4">Nuestro propósito</h3>
-              <p className="text-gray-600 leading-relaxed text-xl">
-                Impulsar procesos de mejora y transformación en las empresas.
-                Potenciar el desarrollo de las personas para que formen mejores equipos de trabajo.
-                Brindar herramientas para diseñar futuro.
-              </p>
+              <ul className="space-y-2">
+                {[
+                  "Impulsar procesos de mejora y transformación en las empresas.",
+                  "Potenciar el desarrollo de las personas para que formen mejores equipos de trabajo.",
+                  "Brindar herramientas para diseñar futuro."
+                ].map((text, i) => (
+                  <li key={i} className="flex items-start gap-2">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#f78d31] mt-2.5 flex-shrink-0" />
+                    <span className="text-gray-600 leading-relaxed text-xl">{text}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </motion.div>
         </div>
@@ -439,75 +446,75 @@ export default function Page() {
         </motion.div>
 
         {/* Business Coaching Section */}
-<motion.div 
-className="w-full bg-[#001731] min-h-screen flex items-center relative overflow-hidden"
-initial={{ opacity: 0 }}
-whileInView={{ opacity: 1 }}
-transition={{ duration: 0.5 }}
-viewport={{ once: true }}
->
-<div className="container mx-auto px-4 py-24 relative">
-  <div className="flex flex-col lg:flex-row items-start gap-16">
-    <motion.div 
-      className="lg:w-1/3"
-      initial={{ opacity: 0, x: -50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.2 }}
-      viewport={{ once: true }}
-    >
-      <img 
-        src="/logo3.png" 
-        alt="SiCoaching Empresarial" 
-        className="w-72 mb-4"
-      />
-      <h3 className=" text-center text-6xl font-bold text-white mb-6">Empresas</h3>
-    </motion.div>
-    
-    <motion.div 
-      className="lg:w-2/3 space-y-8"
-      initial={{ opacity: 0, x: 50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.3 }}
-      viewport={{ once: true }}
-    >
-      <div className="grid md:grid-cols-2 gap-8">
-        {[
-          {
-            title: "Liderazgo Efectivo",
-            description: "Desarrolla y optimiza tus habilidades de liderazgo.",
-            icon: <Award className="w-8 h-8 text-[#f78d31]" />
-          },
-          {
-            title: "Cultura Organizacional",
-            description: "Construye una cultura empresarial sólida y positiva.",
-            icon: <Users className="w-8 h-8 text-[#f78d31]" />
-          },
-          {
-            title: "Gestión de Equipos",
-            description: "Mejora la comunicación y el rendimiento de tus equipos.",
-            icon: <Target className="w-8 h-8 text-[#f78d31]" />
-          },
-          {
-            title: "Productividad",
-            description: "Optimiza procesos y maximiza resultados empresariales.",
-            icon: <BarChart2 className="w-8 h-8 text-[#f78d31]" />
-          }
-        ].map((feature, index) => (
-          <motion.div 
-            key={index}
-            className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            viewport={{ once: true }}
-          >
-            <div className="mb-4">{feature.icon}</div>
-            <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
-            <p className="text-white/80">{feature.description}</p>
-          </motion.div>
-        ))}
-      </div>
-      <motion.button
+        <motion.div 
+          className="w-full bg-[#001731] min-h-screen flex items-center relative overflow-hidden"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <div className="container mx-auto px-4 py-24 relative">
+            <div className="flex flex-col lg:flex-row items-start gap-16">
+              <motion.div 
+                className="lg:w-1/3 flex flex-col items-center"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <img 
+                  src="/logo3.png" 
+                  alt="SiCoaching Empresarial" 
+                  className="w-72"
+                />
+                <h3 className="text-center text-6xl font-bold text-white mt-2">Empresas</h3>
+              </motion.div>
+              
+              <motion.div 
+                className="lg:w-2/3 space-y-8"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <div className="grid md:grid-cols-2 gap-8">
+                  {[
+                    {
+                      title: "Liderazgo Efectivo",
+                      description: "Desarrolla y optimiza tus habilidades de liderazgo.",
+                      icon: <Award className="w-8 h-8 text-[#f78d31]" />
+                    },
+                    {
+                      title: "Cultura Organizacional",
+                      description: "Construye una cultura empresarial sólida y positiva.",
+                      icon: <Users className="w-8 h-8 text-[#f78d31]" />
+                    },
+                    {
+                      title: "Gestión de Equipos",
+                      description: "Mejora la comunicación y el rendimiento de tus equipos.",
+                      icon: <Target className="w-8 h-8 text-[#f78d31]" />
+                    },
+                    {
+                      title: "Productividad",
+                      description: "Optimiza procesos y maximiza resultados empresariales.",
+                      icon: <BarChart2 className="w-8 h-8 text-[#f78d31]" />
+                    }
+                  ].map((feature, index) => (
+                    <motion.div 
+                      key={index}
+                      className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="mb-4">{feature.icon}</div>
+                      <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
+                      <p className="text-white/80">{feature.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+                <motion.button
                   onClick={() => handleOpenContactForm("Coaching Personal")}
                   className="inline-flex items-center px-8 py-4 bg-[#f78d31] text-white rounded-full text-lg transition-all"
                   whileHover={{ scale: 1.05 }}
@@ -522,77 +529,77 @@ viewport={{ once: true }}
         </motion.div>
 
         {/* Personal Coaching Section */}
-<motion.div 
-className="w-full bg-[#f78d31] min-h-screen flex items-center relative overflow-hidden"
-initial={{ opacity: 0 }}
-whileInView={{ opacity: 1 }}
-transition={{ duration: 0.5 }}
-viewport={{ once: true }}
->
-<div className="container mx-auto px-4 py-24 relative">
-  <div className="flex flex-col lg:flex-row items-start gap-16">
-    <motion.div 
-      className="lg:w-1/3"
-      initial={{ opacity: 0, x: -50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.2 }}
-      viewport={{ once: true }}
-    >
-      <img 
-        src="/logo2.png" 
-        alt="SiCoaching Personal" 
-        className="w-72 mb-4"
-      />
-      <h3 className="text-center text-6xl font-bold text-white mb-6">Personas</h3>
-      <p className="text-white/90 text-xl leading-relaxed">
-      </p>
-    </motion.div>
-    
-    <motion.div 
-      className="lg:w-2/3 space-y-8"
-      initial={{ opacity: 0, x: 50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.3 }}
-      viewport={{ once: true }}
-    >
-      <div className="grid md:grid-cols-2 gap-8">
-        {[
-          {
-            title: "Desarrollo Personal",
-            description: "Identifica y supera limitaciones para alcanzar tu máximo potencial.",
-            icon: <Target className="w-8 h-8 text-white" />
-          },
-          {
-            title: "Balance Vida-Trabajo",
-            description: "Encuentra el equilibrio perfecto entre tu vida personal y profesional.",
-            icon: <Users className="w-8 h-8 text-white" />
-          },
-          {
-            title: "Gestión Emocional",
-            description: "Desarrolla inteligencia emocional y mejora tus relaciones interpersonales.",
-            icon: <Brain className="w-8 h-8 text-white" />
-          },
-          {
-            title: "Objetivos Claros",
-            description: "Define y alcanza metas significativas en tu vida personal.",
-            icon: <CheckCircle2 className="w-8 h-8 text-white" />
-          }
-        ].map((feature, index) => (
-          <motion.div 
-            key={index}
-            className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            viewport={{ once: true }}
-          >
-            <div className="mb-4">{feature.icon}</div>
-            <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
-            <p className="text-white/80">{feature.description}</p>
-          </motion.div>
-        ))}
-      </div>
-      <motion.button
+        <motion.div 
+          className="w-full bg-[#f78d31] min-h-screen flex items-center relative overflow-hidden"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <div className="container mx-auto px-4 py-24 relative">
+            <div className="flex flex-col lg:flex-row items-start gap-16">
+              <motion.div 
+                className="lg:w-1/3 flex flex-col items-center"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <img 
+                  src="/logo2.png" 
+                  alt="SiCoaching Personal" 
+                  className="w-72"
+                />
+                <h3 className="text-center text-6xl font-bold text-white mt-2">Personas</h3>
+                <p className="text-white/90 text-xl leading-relaxed">
+                </p>
+              </motion.div>
+              
+              <motion.div 
+                className="lg:w-2/3 space-y-8"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <div className="grid md:grid-cols-2 gap-8">
+                  {[
+                    {
+                      title: "Desarrollo Personal",
+                      description: "Identifica y supera limitaciones para alcanzar tu máximo potencial.",
+                      icon: <Target className="w-8 h-8 text-white" />
+                    },
+                    {
+                      title: "Balance Vida-Trabajo",
+                      description: "Encuentra el equilibrio perfecto entre tu vida personal y profesional.",
+                      icon: <Users className="w-8 h-8 text-white" />
+                    },
+                    {
+                      title: "Gestión Emocional",
+                      description: "Desarrolla inteligencia emocional y mejora tus relaciones interpersonales.",
+                      icon: <Brain className="w-8 h-8 text-white" />
+                    },
+                    {
+                      title: "Objetivos Claros",
+                      description: "Define y alcanza metas significativas en tu vida personal.",
+                      icon: <CheckCircle2 className="w-8 h-8 text-white" />
+                    }
+                  ].map((feature, index) => (
+                    <motion.div 
+                      key={index}
+                      className="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="mb-4">{feature.icon}</div>
+                      <h4 className="text-xl font-semibold text-white mb-3">{feature.title}</h4>
+                      <p className="text-white/80">{feature.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+                <motion.button
                   onClick={() => handleOpenContactForm("Coaching Personal")}
                   className="inline-flex items-center px-8 py-4 bg-[#e9e9e9] text-[#001731]  rounded-full text-lg transition-all"
                   whileHover={{ scale: 1.05 }}
@@ -607,75 +614,75 @@ viewport={{ once: true }}
         </motion.div>
 
         {/* Digital Products Section */}
-<motion.div 
-className="w-full bg-[#e9e9e9] min-h-screen flex items-center relative overflow-hidden"
-initial={{ opacity: 0 }}
-whileInView={{ opacity: 1 }}
-transition={{ duration: 0.5 }}
-viewport={{ once: true }}
->
-<div className="container mx-auto px-4 py-24 relative">
-  <div className="flex flex-col lg:flex-row items-start gap-16">
-    <motion.div 
-      className="lg:w-1/3"
-      initial={{ opacity: 0, x: -50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.2 }}
-      viewport={{ once: true }}
-    >
-      <img 
-        src="/logo1.png" 
-        alt="SiCoaching Digital" 
-        className="w-72 mb-4"
-      />
-      <h3 className=" text-center text-6xl font-bold text-[#001731] mb-6">Programas</h3>
-    </motion.div>
-    
-    <motion.div 
-      className="lg:w-2/3 space-y-8"
-      initial={{ opacity: 0, x: 50 }}
-      whileInView={{ opacity: 1, x: 0 }}
-      transition={{ delay: 0.3 }}
-      viewport={{ once: true }}
-    >
-      <div className="grid md:grid-cols-2 gap-8">
-        {[
-          {
-            title: "Autoconocimiento y expansión a tráves del Focusing",
-            description: "Filosofía de lo implícito y práctica de Focusing para el crecimiento personal, cursado virtual.",
-            icon: <BarChart2 className="w-8 h-8 text-[#001731]" />
-          },
-          {
-            title: "Carrera de Coach Ontológico Profesional",
-            description: "Programa avalado por AACOP, opción virtual o presencial en Instituto de Transformación y Coaching de Rosario.",
-            icon: <ArrowRight className="w-8 h-8 text-[#001731]" />
-          },
-          {
-            title: "Cuando el proceso se bloquea – Focusing para profesionales",
-            description: "Orientado a coaches, counselors, psicólogos y afines .",
-            icon: <Users className="w-8 h-8 text-[#001731]" />
-          },
-          {
-            title: "Coaching en Organizaciones",
-            description: "Postítulo para Coaches. Programa avalado por AACOP, cursado virtual en Instituto de Transformación y Coaching de Rosario.",
-            icon: <Zap className="w-8 h-8 text-[#001731]" />
-          }
-        ].map((feature, index) => (
-          <motion.div 
-            key={index}
-            className="bg-white p-6 rounded-xl shadow-lg border border-gray-100"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: index * 0.1 }}
-            viewport={{ once: true }}
-          >
-            <div className="mb-4">{feature.icon}</div>
-            <h4 className="text-xl font-semibold text-[#001731] mb-3">{feature.title}</h4>
-            <p className="text-gray-600">{feature.description}</p>
-          </motion.div>
-        ))}
-      </div>
-      <motion.button
+        <motion.div 
+          className="w-full bg-[#e9e9e9] min-h-screen flex items-center relative overflow-hidden"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <div className="container mx-auto px-4 py-24 relative">
+            <div className="flex flex-col lg:flex-row items-start gap-16">
+              <motion.div 
+                className="lg:w-1/3 flex flex-col items-center"
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                <img 
+                  src="/logo1.png" 
+                  alt="SiCoaching Digital" 
+                  className="w-72"
+                />
+                <h3 className="text-center text-6xl font-bold text-[#001731] mt-2">Programas</h3>
+              </motion.div>
+              
+              <motion.div 
+                className="lg:w-2/3 space-y-8"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                <div className="grid md:grid-cols-2 gap-8">
+                  {[
+                    {
+                      title: "Autoconocimiento y expansión a tráves del Focusing",
+                      description: "Filosofía de lo implícito y práctica de Focusing para el crecimiento personal. Cursado virtual.",
+                      icon: <BarChart2 className="w-8 h-8 text-[#001731]" />
+                    },
+                    {
+                      title: "Carrera de Coach Ontológico Profesional",
+                      description: "Programa del instituto de Transformación y Coaching de Rosario. Cursado opción virtual y presencial.",
+                      icon: <ArrowRight className="w-8 h-8 text-[#001731]" />
+                    },
+                    {
+                      title: "Procesos que avanzan",
+                      description: "Filosofía de lo implícito en el ámbito de la ayuda profesional. Herramientas para llevar la práctica a un nuevo nivel. Orientado a coaches, counselors, psicólogos y afines. Cursado virtual. ",
+                      icon: <Users className="w-8 h-8 text-[#001731]" />
+                    },
+                    {
+                      title: "Coaching en Organizaciones",
+                      description: "Postítulo para Coaches. Programa del Instituto de Transformación y Coaching de Rosario. Cursado virtual.",
+                      icon: <Zap className="w-8 h-8 text-[#001731]" />
+                    }
+                  ].map((feature, index) => (
+                    <motion.div 
+                      key={index}
+                      className="bg-white p-6 rounded-xl shadow-lg border border-gray-100"
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.1 }}
+                      viewport={{ once: true }}
+                    >
+                      <div className="mb-4">{feature.icon}</div>
+                      <h4 className="text-xl font-semibold text-[#001731] mb-3">{feature.title}</h4>
+                      <p className="text-gray-600">{feature.description}</p>
+                    </motion.div>
+                  ))}
+                </div>
+                <motion.button
                   onClick={() => handleOpenContactForm("Coaching Personal")}
                   className="inline-flex items-center px-8 py-4 bg-[#001731] text-white rounded-full text-lg transition-all"
                   whileHover={{ scale: 1.05 }}
@@ -699,9 +706,9 @@ viewport={{ once: true }}
             transition={{ duration: 0.8 }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl font-bold mb-4">Contáctanos</h2>
+            <h2 className="text-4xl font-bold mb-4">Contactanos</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Estamos aquí para ayudarte en tu viaje de transformación. Conéctate con nosotros y da el primer paso hacia tu crecimiento.
+            ¿En qué querés avanzar? Estamos para facilitar tus procesos de crecimiento y transformación.
             </p>
           </motion.div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -721,8 +728,8 @@ viewport={{ once: true }}
               {
                 icon: <Mail className="w-12 h-12" />,
                 platform: "Email",
-                handle: "info@sicoaching.com",
-                link: "mailto:info@sicoaching.com"
+                handle: "info@sicoaching.com.ar",
+                link: "mailto:info@sicoaching.com.ar"
               }
             ].map((contact, index) => (
               <motion.a
